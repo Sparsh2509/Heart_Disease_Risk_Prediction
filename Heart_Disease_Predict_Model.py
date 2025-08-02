@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score , classification_report, confusion_matrix
 import joblib
 
 # Load dataset
@@ -26,13 +26,17 @@ svm_model = SVC(kernel='rbf', C=1.0, gamma='scale')
 svm_model.fit(X_train, y_train)
 
 # Evaluate
-score = svm_model.score(X_test, y_test)
-print(f"Accuracy Score: {score * 100:.2f}%")
+y_pred = svm_model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy Score: {accuracy * 100:.2f}%")
 
-# Save the model
+# Print classification report
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+
+
+# Save model and scaler
 joblib.dump(svm_model, "svm_heart_model.joblib")
-
-# Optional: Save the scaler too if you plan to use it later
 joblib.dump(scaler, "scaler.joblib")
 
-print("Model and scaler saved")

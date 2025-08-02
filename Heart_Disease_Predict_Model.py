@@ -22,25 +22,31 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Train SVM model
-svm_model = SVC(kernel='rbf', C=1.0, gamma='scale')
-svm_model.fit(X_train, y_train)
+param_grid = {
+    'C': [0.1, 1, 10, 100],
+    'gamma': ['scale', 'auto', 0.01, 0.1, 1],
+    'kernel': ['rbf', 'linear']
+}
 
-# Evaluate
-y_pred = svm_model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy Score: {accuracy * 100:.2f}%")
+# Create the model
+svm = SVC()
 
-# Print classification report
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred))
+# Grid search with 5-fold cross-validation
+grid_search = GridSearchCV(estimator=svm, param_grid=param_grid, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search.fit(X_train, y_train)
 
-# Print confusion matrix
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
+# Best model and parameters
+best_model = grid_search.best_estimator_
+print("Best Parameters:", grid_search.best_params_)
 
+# Evaluate the best model
+y_pred = best_model.predict(X_test)
+print("Accuracy Score:", accuracy_score(y_test, y_pred))
+print("Classification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
 # Save model and scaler
-joblib.dump(svm_model, "svm_heart_model.joblib")
+joblib.dump(best_model, "svm_heart_model.joblib")
 joblib.dump(scaler, "scaler.joblib")
 
 print("Model and scaler saved")

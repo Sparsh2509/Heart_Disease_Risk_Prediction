@@ -34,3 +34,5 @@ joblib.dump(svm_model, "svm_heart_model.joblib")
 
 # Optional: Save the scaler too if you plan to use it later
 joblib.dump(scaler, "scaler.joblib")
+
+print("Model and scaler saved")

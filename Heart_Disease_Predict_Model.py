@@ -34,9 +34,14 @@ print(f"Accuracy Score: {accuracy * 100:.2f}%")
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
 
+# Print confusion matrix
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
 
 
 # Save model and scaler
 joblib.dump(svm_model, "svm_heart_model.joblib")
 joblib.dump(scaler, "scaler.joblib")
+
+print("Model and scaler saved")
 

@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the dataset
-df = pd.read_csv("D:\\Sparsh\\ML_Projects\\Heart_Disease_Prediction\\Dataset\\Heart_disease_cleveland_new.csv")
+df = pd.read_csv("D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\Heart_disease_cleveland_new.csv")
 
 
 # High Cholesterol Flag (> 240 mg/dl)

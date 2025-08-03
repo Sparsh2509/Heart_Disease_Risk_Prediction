@@ -64,7 +64,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import joblib
 
 # Load dataset
-df = pd.read_csv("Heart_disease_cleveland_new.csv")
+df = pd.read_csv("D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\Heart_disease_cleveland_new.csv")
 
 # Features and target
 X = df.drop("target", axis=1)

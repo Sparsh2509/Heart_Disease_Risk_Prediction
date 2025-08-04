@@ -12,26 +12,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the dataset
-df = pd.read_csv("D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\Heart_disease_cleveland_new.csv")
+df = pd.read_csv("D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\heart_cleveland_upload.csv")
 
 
-# High Cholesterol Flag (> 240 mg/dl)
-df['high_chol_flag'] = 0
-for i in range(len(df)):
-    if df.loc[i, 'chol'] > 240:
-        df.loc[i, 'high_chol_flag'] = 1
-
-# High Fasting Blood Sugar Flag (fbs == 1)
-df['fbs_flag'] = 0
-for i in range(len(df)):
-    if df.loc[i, 'fbs'] == 1:
-        df.loc[i, 'fbs_flag'] = 1
-
-# Abnormal RestECG Flag (restecg != 0)
-df['restecg_flag'] = 0
-for i in range(len(df)):
-    if df.loc[i, 'restecg'] != 0:
-        df.loc[i, 'restecg_flag'] = 1
+# df['high_chol_flag'] = (df['chol'] > 240).astype(int)
+# df['fbs_flag'] = (df['fbs'] > 120).astype(int)
+# df['restecg_flag'] = (df['restecg'] != 0).astype(int)
 
 
 X = df.drop("target", axis=1)

@@ -20,8 +20,8 @@ df = pd.read_csv("D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\heart_c
 # df['restecg_flag'] = (df['restecg'] != 0).astype(int)
 
 
-X = df.drop("target", axis=1)
-y = df["target"]
+X = df.drop("condition", axis=1)
+y = df["condition"]
 
 # Train-test split
 X_train, X_test, y_train, y_test = train_test_split(

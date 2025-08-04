@@ -36,26 +36,23 @@ def predict(data: HeartData):
     d = data.dict()
 
     # Step 2: Compute engineered features (flags)
-    high_chol_flag = int(d["chol"] > 240)
-    fbs_flag = int(d["fbs"] > 120)
-    restecg_flag = int(d["restecg"] != 0)
+    high_chol_flag = int(data.chol > 240)
+    fbs_flag = int(data.fbs > 120)
+    restecg_flag = int(data.restecg != 0)
 
-    # Step 3: Prepare final 16-feature array
-    input_features = [
-        d["age"], d["sex"], d["cp"], d["trestbps"], d["chol"],
-        d["fbs"], d["restecg"], d["thalach"], d["exang"], d["oldpeak"],
-        d["slope"], d["ca"], d["thal"],
-        high_chol_flag, fbs_flag, restecg_flag
-    ]
-    input_array = np.array(input_features).reshape(1, -1)
+    # Create final input array (make sure order matches training)
+    input_data = np.array([[data.age, data.sex, data.cp, data.trestbps, data.chol,
+                            data.fbs, data.restecg, data.thalach, data.exang, data.oldpeak,
+                            data.slope, data.ca, data.thal, high_chol_flag, fbs_flag, restecg_flag]])
 
-    # Step 4: Standardize & Predict
-    input_scaled = scaler.transform(input_array)
-    prediction = model.predict(input_scaled)[0]
+    # Scale
+    input_scaled = scaler.transform(input_data)
 
-    # Step 5: Return result
-    result = "Heart Disease Detected" if prediction == 1 else "No Heart Disease"
+    # Predict
+    prediction = model.predict(input_scaled)
+    result = "Heart Disease Detected" if prediction[0] == 1 else "No Heart Disease"
+
     return {
-        "prediction": int(prediction),
+        "prediction": int(prediction[0]),
         "result": result
     }

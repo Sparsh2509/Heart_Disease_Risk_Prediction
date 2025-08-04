@@ -12,12 +12,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the dataset
-df = pd.read_csv("D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\heart_cleveland_upload.csv")
+df = pd.read_csv("D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\Heart_disease_cleveland_new.csv")
 
 
-# df['high_chol_flag'] = (df['chol'] > 240).astype(int)
-# df['fbs_flag'] = (df['fbs'] > 120).astype(int)
-# df['restecg_flag'] = (df['restecg'] != 0).astype(int)
+df['high_chol_flag'] = (df['chol'] > 240).astype(int)
+df['fbs_flag'] = (df['fbs'] > 120).astype(int)
+df['restecg_flag'] = (df['restecg'] != 0).astype(int)
 
 
 X = df.drop("condition", axis=1)

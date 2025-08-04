@@ -37,7 +37,7 @@ def predict(data: HeartData):
 
     # Step 2: Compute engineered features (flags)
     high_chol_flag = int(data.chol > 240)
-    fbs_flag = int(data.fbs > 120)
+    fbs_flag = int(data.fbs) 
     restecg_flag = int(data.restecg != 0)
 
     # Create final input array (make sure order matches training)

@@ -17,7 +17,7 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
 - Trained using the **K-Nearest Neighbors (KNN)** algorithm for accurate classification
 - Returns a clear **prediction** (Heart Disease / No Heart Disease) with **confidence score of 90.16%**
 - Built using a lightweight and scalable **FastAPI backend**
-- 
+
 
 ---
 
@@ -80,7 +80,7 @@ uvicorn app:app --reload
 Navigate to:
 - Swagger Docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - Root: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-- Render:[https://heart-disease-risk-prediction-hpkk.onrender.com](https://heart-disease-risk-prediction-hpkk.onrender.com)
+- Render: [https://heart-disease-risk-prediction-hpkk.onrender.com](https://heart-disease-risk-prediction-hpkk.onrender.com)
 
 ---
 

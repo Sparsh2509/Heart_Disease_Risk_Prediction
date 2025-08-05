@@ -7,29 +7,31 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
 
 ## 🚀 Features
 
-- Predicts final student grade on a 0–20 scale.
-- Organized input via four intuitive sections:
-  - Student Details
-  - Family Background
-  - Academic Status
-  - Health Status
-- Categorical label encoding with automatic casing normalization.
-- Grading remark generation (A+, B, C, etc.).
-- Easy Flutter/mobile app integration.
+- Predicts **presence or absence of heart disease** (0 = No Disease, 1 = Disease)
+- Organized input via five intuitive medical sections:
+  - **Demographic Information** – age, sex
+  - **Chest Pain & Vitals** – chest pain type, resting blood pressure, cholesterol
+  - **Blood & Sugar Data** – fasting blood sugar, maximum heart rate
+  - **ECG & Exercise Information** – resting ECG results, exercise-induced angina, ST depression
+  - **Scan & Diagnostic Results** – number of major vessels colored, thalassemia type
+- Trained using the **K-Nearest Neighbors (KNN)** algorithm for accurate classification
+- Returns a clear **prediction** (Heart Disease / No Heart Disease) with **confidence score of 90.16%**
+- Built using a lightweight and scalable **FastAPI backend**
+- 
 
 ---
 
 ## 📂 Project Structure
 
 ```
-student_performance_prediction/
-├── app.py                                            # FastAPI backend logic
-├── Student_Performance_model.py                      # Model training script
-├── student_performance_portuguese_dataset.csv        # Cleaned Portuguese dataset used for training
-├── student_performance_model.joblib                  # Trained RandomForest model
-├── label_encoders.joblib                             # Encoders for categorical columns
-├── requirements.txt                                  # Python package dependencies
-└── README.md                                         # Project documentation
+Heart_Disease_Prediction/
+├── app.py                                              # FastAPI backend logic
+├── Heart_Disease_Predict_Model.py                      # Model training script
+├── Heart_disease_cleveland_new.csv                     # Cleaned cleveland dataset used for training
+├── knn_heart_model.joblib                              # Trained KNN model
+├── knn_scaler.joblib                                   # Scaler for more good fitting
+├── requirements.txt                                    # Python package dependencies
+└── README.md                                           # Project documentation
 ```
 
 ---
@@ -42,7 +44,7 @@ student_performance_prediction/
 ### Setup:
 ```bash
 # Repository Name
-Student_Performance_Prediction
+Heart_Disease_Risk_Prediction
 
 # Create virtual environment
 python -m venv venv
@@ -59,12 +61,12 @@ pip install -r requirements.txt
 To train or retrain the model using the dataset:
 
 ```bash
-python Student_Performance_model.py
+python Heart_Disease_Predict_Model.py
 ```
 
-This will generate the model and encoder files:
-- `student_performance_model.joblib`
-- `label_encoders.joblib`
+This will generate the model and scaler files:
+- `knn_heart_model.joblib`
+- `knn_scaler.joblib`
 
 ---
 
@@ -78,6 +80,7 @@ uvicorn app:app --reload
 Navigate to:
 - Swagger Docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - Root: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- Render:[https://heart-disease-risk-prediction-hpkk.onrender.com](https://heart-disease-risk-prediction-hpkk.onrender.com)
 
 ---
 
@@ -91,80 +94,47 @@ POST /predict
 ### Request Body Example:
 ```json
 {
-  "student": {
-    "school": "GP",
-    "sex": "M",
-    "age": 17,
-    "address": "U"
-  },
-  "family": {
-    "famsize": "GT3",
-    "Pstatus": "T",
-    "Medu": 4,
-    "Fedu": 2,
-    "Mjob": "teacher",
-    "Fjob": "services",
-    "reason": "reputation",
-    "guardian": "mother",
-    "famsup": "yes"
-  },
-  "academic": {
-    "traveltime": 1,
-    "studytime": 3,
-    "failures": 0,
-    "schoolsup": "no",
-    "paid": "yes",
-    "activities": "yes",
-    "internet": "yes",
-    "nursery": "yes",
-    "higher": "yes",
-    "absences": 4,
-    "G1": 16,
-    "G2": 18
-  },
-  "health": {
-    "romantic": "no",
-    "famrel": 4,
-    "freetime": 3,
-    "goout": 2,
-    "Dalc": 1,
-    "Walc": 1,
-    "health": 4
-  }
+  "age": 52,
+  "sex": 1,
+  "cp": 0,
+  "trestbps": 125,
+  "chol": 212,
+  "fbs": 0,
+  "restecg": 1,
+  "thalach": 168,
+  "exang": 0,
+  "oldpeak": 1.0,
+  "slope": 2,
+  "ca": 2,
+  "thal": 2
 }
+
 ```
 
 ### Sample Response:
 ```json
 {
-  "predicted_final_Marks": 17.3,
-  "remark": "A (Very Good)"
+  "prediction": 1,
+  "result": "Heart Disease Detected"
 }
+
 ```
 
 ---
 
 ## 🧠 Model Overview
 
-- Algorithm: `RandomForestRegressor`
-- Input Features: 31
-- Target: `G3` (final grade)
-- Evaluation: R² Score ~ 0.84
-
----
-
-## 🖼️ Enhancement Ideas
-
-- Show emoji/photo based on grade in frontend.
-- Implement history tracking per student.
-- Deploy via Render, Vercel, or Docker.
+- Algorithm: `K-Nearest Neighbors (KNN)`
+- Input Features: 13
+- Target: `Target` (0 or 1)
+- Evaluation: Accuracy ~ 90.16%
 
 ---
 
 ## 📘 Dataset Info
 
-- Source: UCI Portuguese Student Dataset
-- [https://archive.ics.uci.edu/dataset/320/student+performance](https://archive.ics.uci.edu/dataset/320/student+performance)
+- Source: Heart Disease Cleveland UCI
+- [Heart Disease Cleveland UCI](https://www.kaggle.com/datasets/cherngs/heart-disease-cleveland-uci?resource=download)
 
 ---
 

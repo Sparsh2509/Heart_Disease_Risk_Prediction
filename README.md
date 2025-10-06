@@ -14,10 +14,14 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
   - **Blood & Sugar Data** – fasting blood sugar, maximum heart rate
   - **ECG & Exercise Information** – resting ECG results, exercise-induced angina, ST depression
   - **Scan & Diagnostic Results** – number of major vessels colored, thalassemia type
-- Trained using the **K-Nearest Neighbors (KNN)** algorithm for accurate classification
-- Returns a clear **prediction** (Heart Disease / No Heart Disease) with **confidence score of 90.16%**
+- Provides warning flags for abnormal health indicators:
+  - ⚠️ High cholesterol                            (chol > 240 mg/dl)
+  - ⚠️ High fasting blood sugar                    (fbs > 120 mg/dl)
+  - ⚠️ Low maximum heart rate (exercise tolerance) (thalach < 130 bpm)
+  - ⚠️ High resting blood pressure                 (trestbps > 140 mm Hg)  -
+- Trained using the **Random Forest Classifier** algorithm for accurate classification
+- Returns a clear **prediction** (Heart Disease / No Heart Disease) with **confidence score of 90.20%**
 - Built using a lightweight and scalable **FastAPI backend**
-
 
 ---
 

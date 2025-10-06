@@ -18,7 +18,7 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
   - ⚠️ High cholesterol                            (chol > 240 mg/dl)
   - ⚠️ High fasting blood sugar                    (fbs > 120 mg/dl)
   - ⚠️ Low maximum heart rate (exercise tolerance) (thalach < 130 bpm)
-  - ⚠️ High resting blood pressure                 (trestbps > 140 mm Hg)  -
+  - ⚠️ High resting blood pressure                 (trestbps > 140 mm Hg) 
 - Trained using the **Random Forest Classifier** algorithm for accurate classification
 - Returns a clear **prediction** (Heart Disease / No Heart Disease) with **confidence score of 90.20%**
 - Built using a lightweight and scalable **FastAPI backend**
@@ -32,8 +32,8 @@ Heart_Disease_Prediction/
 ├── app.py                                              # FastAPI backend logic
 ├── Heart_Disease_Predict_Model.py                      # Model training script
 ├── Heart_disease_cleveland_new.csv                     # Cleaned cleveland dataset used for training
-├── knn_heart_model.joblib                              # Trained KNN model
-├── knn_scaler.joblib                                   # Scaler for more good fitting
+├── randomforest_heart_model.joblib                     # Trained Random forest classifier model
+├── feature_columns.joblib                              # Saved feature order for clean prediction
 ├── requirements.txt                                    # Python package dependencies
 └── README.md                                           # Project documentation
 ```
@@ -68,9 +68,9 @@ To train or retrain the model using the dataset:
 python Heart_Disease_Predict_Model.py
 ```
 
-This will generate the model and scaler files:
-- `knn_heart_model.joblib`
-- `knn_scaler.joblib`
+This will generate the model and features order files:
+- `randomforest_heart_model.joblib `
+- `feature_columns.joblib`
 
 ---
 
@@ -128,10 +128,10 @@ POST /predict
 
 ## 🧠 Model Overview
 
-- Algorithm: `K-Nearest Neighbors (KNN)`
+- Algorithm: `Random Forest Classifier`
 - Input Features: 13
 - Target: `Target` (0 or 1)
-- Evaluation: Accuracy ~ 90.16%
+- Evaluation: Accuracy ~ 90.20%
 
 ---
 

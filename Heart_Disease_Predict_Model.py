@@ -7,39 +7,26 @@ import joblib
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# -------------------------------
-# 1️⃣ Load dataset
-# -------------------------------
+# Load dataset
 df = pd.read_csv(r"D:\Sparsh\ML_Projects\Heart_Disease_Prediction\Dataset\Heart_disease_cleveland_new.csv")
 
-# -------------------------------
-# 2️⃣ Feature Engineering
-# -------------------------------
-# Keep logical, interpretable flags
-df["fbs_flag"] = (df["fbs"] > 120).astype(int)
-df["restecg_flag"] = (df["restecg"] != 0).astype(int)
 
-# ✅ DO NOT ADD high_chol_flag (it created reverse pattern)
-X = df.drop("target", axis=1)
+#Features and target
+X = df.drop("target", axis=1)  # Only original features
 y = df["target"]
 
-# -------------------------------
-# 3️⃣ Train-Test Split
-# -------------------------------
+
+#Train-Test Split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-# -------------------------------
-# 4️⃣ Standardization
-# -------------------------------
+# Standardization
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# -------------------------------
-# 5️⃣ Train Model (Random Forest)
-# -------------------------------
+# Model execution
 model = RandomForestClassifier(
     n_estimators=200,
     random_state=42,
@@ -49,9 +36,7 @@ model = RandomForestClassifier(
 )
 model.fit(X_train_scaled, y_train)
 
-# -------------------------------
-# 6️⃣ Evaluate
-# -------------------------------
+#Model prediction
 y_pred = model.predict(X_test_scaled)
 accuracy = accuracy_score(y_test, y_pred)
 
@@ -59,26 +44,20 @@ print(f"✅ Accuracy: {accuracy:.3f}\n")
 print("Classification Report:\n", classification_report(y_test, y_pred))
 print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
-# -------------------------------
-# 7️⃣ Save Model + Scaler
-# -------------------------------
+# Save model and scaler files 
 joblib.dump(model, "rf_heart_model.joblib")
 joblib.dump(scaler, "rf_scaler.joblib")
-print("\nModel and scaler saved successfully ✅")
+print("\nModel, scaler saved successfully")
 
-# -------------------------------
-# 8️⃣ Optional: Feature Importance
-# -------------------------------
+# Features importance
 feat_importance = pd.Series(model.feature_importances_, index=X.columns).sort_values(ascending=False)
 plt.figure(figsize=(10,5))
 sns.barplot(x=feat_importance.values, y=feat_importance.index)
-plt.title("Feature Importance (Random Forest)")
+plt.title("Feature Importance (Random Forest) without Flags")
 plt.tight_layout()
 plt.show()
 
-# -------------------------------
-# 9️⃣ Correlation Heatmap
-# -------------------------------
+# correlation mapping 
 plt.figure(figsize=(12, 8))
 sns.heatmap(df.corr(), annot=True, fmt=".2f", cmap="coolwarm", square=True)
 plt.title("Correlation Heatmap of Heart Disease Dataset")

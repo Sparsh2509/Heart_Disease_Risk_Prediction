@@ -28,9 +28,6 @@ class HeartData(BaseModel):
     thal: int
 
 
-
-# Routes
-
 THRESHOLDS = {
     "chol": 240,      # High cholesterol
     "fbs": 120,       # High fasting sugar
@@ -38,10 +35,7 @@ THRESHOLDS = {
     "trestbps": 140   # High blood pressure
 }
 
-# -------------------------------
 # Routes
-# -------------------------------
-@app.get("/")
 def root():
     return {"message": "Welcome to the Heart Disease Prediction API"}
 
@@ -52,33 +46,29 @@ def predict(data: HeartData):
     # ✅ Convert to DataFrame (keeps feature names safe)
     input_df = pd.DataFrame([d], columns=feature_names)
 
-    # -------------------------------
-    # Threshold-based Risk Flags
-    # -------------------------------
+    # Threshold-based Risk Flags   
     health_flags = []
 
     # Cholesterol check
     if d["chol"] > THRESHOLDS["chol"]:
-        health_flags.append("⚠️ High cholesterol level (chol > 240 mg/dl)")
+        health_flags.append("High cholesterol level (chol > 240 mg/dl)")
 
     # Fasting blood sugar check
     if d["fbs"] > THRESHOLDS["fbs"]:
-        health_flags.append("⚠️ High fasting blood sugar (fbs > 120 mg/dl)")
+        health_flags.append("High fasting blood sugar (fbs > 120 mg/dl)")
 
     # Max heart rate check
     if d["thalach"] < THRESHOLDS["thalach"]:
-        health_flags.append("⚠️ Low max heart rate achieved (thalach < 130 bpm)")
+        health_flags.append("Low max heart rate achieved (thalach < 130 bpm)")
 
     # Resting BP check
     if d["trestbps"] > THRESHOLDS["trestbps"]:
-        health_flags.append("⚠️ High resting blood pressure (trestbps > 140 mm Hg)")
+        health_flags.append("High resting blood pressure (trestbps > 140 mm Hg)")
 
     if not health_flags:
-        health_flags.append("✅ All vitals within healthy range")
+        health_flags.append("All vitals within healthy range")
 
-    # -------------------------------
     # Predict using trained model
-    # -------------------------------
     prediction = model.predict(input_df)[0]
     result = "Heart Disease Detected" if prediction == 1 else "No Heart Disease"
 

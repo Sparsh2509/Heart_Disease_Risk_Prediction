@@ -36,7 +36,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 
-print(f"✅ Accuracy: {accuracy:.3f}\n")
+print(f"Accuracy: {accuracy:.3f}\n")
 print("Classification Report:\n", classification_report(y_test, y_pred))
 print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
@@ -44,7 +44,7 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 # Save model & feature names
 joblib.dump(model, "randomforest_heart_model.joblib")
 joblib.dump(X.columns.tolist(), "feature_columns.joblib")
-print("\nModel and feature names saved successfully ✅")
+print("\nModel and feature names saved successfully")
 
 
 # Feature Importance

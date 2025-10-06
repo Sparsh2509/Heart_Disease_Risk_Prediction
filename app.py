@@ -4,8 +4,8 @@ import joblib
 import numpy as np
 
 # Load model and feature columns
-model = joblib.load("rf_heart_model_no_scaler.joblib")
-feature_columns = joblib.load("feature_columns_no_scaler.joblib")
+model = joblib.load("randomforest_heart_model.joblib")
+feature_columns = joblib.load("feature_columns.joblib")
 
 app = FastAPI(title="Heart Disease Prediction API")
 

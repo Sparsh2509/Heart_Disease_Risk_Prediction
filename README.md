@@ -99,28 +99,32 @@ POST /predict
 ### Request Body Example:
 ```json
 {
-  "age": 52,
+  "age": 55,
   "sex": 1,
-  "cp": 0,
-  "trestbps": 125,
-  "chol": 212,
-  "fbs": 0,
+  "cp": 2,
+  "trestbps": 130,
+  "chol": 230,
+  "fbs": 110,
   "restecg": 1,
-  "thalach": 168,
+  "thalach": 150,
   "exang": 0,
-  "oldpeak": 1.0,
-  "slope": 2,
+  "oldpeak": 1.5,
+  "slope": 1,
   "ca": 2,
-  "thal": 2
+  "thal": 1
 }
+
 
 ```
 
 ### Sample Response:
 ```json
 {
-  "prediction": 1,
-  "result": "Heart Disease Detected"
+    "prediction": 0,
+    "result": "No Heart Disease",
+    "health_flags": [
+        "All vitals within healthy range"
+    ]
 }
 
 ```

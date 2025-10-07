@@ -43,7 +43,7 @@ def root():
 def predict(data: HeartData):
     d = data.dict()
 
-    # ✅ Convert to DataFrame (keeps feature names safe)
+    # Convert to DataFrame (keeps feature names safe)
     input_df = pd.DataFrame([d], columns=feature_names)
 
     # Threshold-based Risk Flags   
@@ -65,7 +65,7 @@ def predict(data: HeartData):
     if d["trestbps"] > THRESHOLDS["trestbps"]:
         health_flags.append("High resting blood pressure (trestbps > 140 mm Hg)")
 
-    if not health_flags:
+    else:
         health_flags.append("All vitals within healthy range")
 
     # Predict using trained model

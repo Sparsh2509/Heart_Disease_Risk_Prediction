@@ -18,7 +18,8 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
   - ⚠️ High cholesterol                            (chol > 240 mg/dl)
   - ⚠️ High fasting blood sugar                    (fbs > 120 mg/dl)
   - ⚠️ Low maximum heart rate (exercise tolerance) (thalach < 130 bpm)
-  - ⚠️ High resting blood pressure                 (trestbps > 140 mm Hg) 
+  - ⚠️ High resting blood pressure                 (trestbps > 140 mm Hg)
+  - If not in any flag warning it return **All vitals within healthy range** 
 - Trained using the **Random Forest Classifier** algorithm for accurate classification
 - Returns a clear **prediction** (Heart Disease / No Heart Disease) with **confidence score of 90.20%**
 - Built using a lightweight and scalable **FastAPI backend**

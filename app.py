@@ -91,4 +91,12 @@ def predict(data: HeartData):
     # Rule-based Scoring
     score, flags = calculate_score(d)
 
+    # Interpret score
+    if score <= 3:
+        score_risk = "Low Risk "
+    elif 4 <= score <= 7:
+        score_risk = "Moderate Risk"
+    else:
+        score_risk = "High Risk"
+
 

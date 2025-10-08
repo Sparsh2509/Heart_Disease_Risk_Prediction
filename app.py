@@ -102,11 +102,28 @@ def predict(data: HeartData):
 
     # Message based on model probability
     if disease_prob < 30:
-        ml_message = "Low risk — your heart health seems good "
+        ml_message = "Low risk — your heart health seems good"
     elif 30 <= disease_prob <= 60:
-        ml_message = "Moderate risk — maintain a healthy lifestyle "
+        ml_message = "Moderate risk — maintain a healthy lifestyle"
     else:
         ml_message = "High risk — please consult a cardiologist immediately"
+
+    
+    # Combine insights
+    return {
+        "ml_prediction": {
+            "heart_disease_probability": f"{disease_prob}%",
+            "no_disease_probability": f"{no_disease_prob}%",
+            "ml_risk_message": ml_message
+        },
+        "score_prediction": {
+            "risk_score": score,
+            "risk_level": score_risk,
+            "threshold_flags": flags if flags else ["All vitals within healthy range"]
+        },
+        "final_advice": "The ML model and scoring system together indicate your overall heart risk. "
+                        "For accurate diagnosis, please consult a healthcare professional."
+    }
 
 
 

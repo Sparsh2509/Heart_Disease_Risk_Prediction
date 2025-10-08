@@ -19,6 +19,8 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
   - **ECG & Exercise Information** – resting ECG results, exercise-induced angina, ST depression
   - **Scan & Diagnostic Results** – number of major vessels colored, thalassemia type
 
+---
+
 ## 🧠 Machine Learning Prediction (Random Forest Classifier)
 
 - Predicts the probability of having heart disease using a trained Random Forest model.

@@ -1,15 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import joblib
-import pandas as pd
 
-
-# Load Model and Feature Names
-model = joblib.load("randomforest_heart_model.joblib")
-feature_names = joblib.load("feature_columns.joblib") 
-
-app = FastAPI(title="Heart Disease Prediction API")
-
+app = FastAPI(title="Heart Disease Risk Scoring API")
 
 # Input Schema
 class HeartData(BaseModel):
@@ -27,53 +19,49 @@ class HeartData(BaseModel):
     ca: int
     thal: int
 
-
-THRESHOLDS = {
-    "chol": 240,      # High cholesterol
-    "fbs": 120,       # High fasting sugar
-    "thalach": 130,   # Low heart rate (danger zone if below)
-    "trestbps": 140   # High blood pressure
-}
-
-# Routes
-def root():
-    return {"message": "Welcome to the Heart Disease Prediction API"}
-
 @app.post("/predict")
 def predict(data: HeartData):
     d = data.dict()
+    score = 0
+    reasons = []
 
-    # Convert to DataFrame (keeps feature names safe)
-    input_df = pd.DataFrame([d], columns=feature_names)
+    # Threshold scoring rules
+    if d["chol"] > 240:
+        score += 2
+        reasons.append("High cholesterol (>240 mg/dl)")
+    if d["trestbps"] > 140:
+        score += 2
+        reasons.append("High resting BP (>140 mm Hg)")
+    if d["thalach"] < 130:
+        score += 2
+        reasons.append("Low maximum heart rate (<130 bpm)")
+    if d["fbs"] > 120:
+        score += 1
+        reasons.append("High fasting blood sugar (>120 mg/dl)")
+    if d["age"] > 50:
+        score += 1
+        reasons.append("Older age (>50 years)")
+    if d["cp"] >= 2:
+        score += 1
+        reasons.append("Abnormal chest pain pattern")
+    if d["exang"] == 1:
+        score += 2
+        reasons.append("Exercise-induced angina detected")
 
-    # Threshold-based Risk Flags   
-    health_flags = []
-
-    # Cholesterol check
-    if d["chol"] > THRESHOLDS["chol"]:
-        health_flags.append("High cholesterol level (chol > 240 mg/dl)")
-
-    # Fasting blood sugar check
-    if d["fbs"] > THRESHOLDS["fbs"]:
-        health_flags.append("High fasting blood sugar (fbs > 120 mg/dl)")
-
-    # Max heart rate check
-    if d["thalach"] < THRESHOLDS["thalach"]:
-        health_flags.append("Low max heart rate achieved (thalach < 130 bpm)")
-
-    # Resting BP check
-    if d["trestbps"] > THRESHOLDS["trestbps"]:
-        health_flags.append("High resting blood pressure (trestbps > 140 mm Hg)")
-
-    if not health_flags:
-        health_flags.append("All vitals within healthy range")
-
-    # Predict using trained model
-    prediction = model.predict(input_df)[0]
-    result = "Heart Disease Detected" if prediction == 1 else "No Heart Disease"
+    # Risk classification
+    if score <= 2:
+        risk_level = "Low Risk ❤️"
+        advice = "Your vitals look good! Keep maintaining a healthy lifestyle."
+    elif 3 <= score <= 5:
+        risk_level = "Moderate Risk 💛"
+        advice = "Some parameters are elevated. Regular exercise and a balanced diet are recommended."
+    else:
+        risk_level = "High Risk ❤️‍🔥"
+        advice = "You have multiple high-risk indicators. Consider consulting a cardiologist soon."
 
     return {
-        "prediction": int(prediction),
-        "result": result,
-        "health_flags": health_flags
+        "risk_score": score,
+        "risk_level": risk_level,
+        "reasons": reasons if reasons else ["All vitals in healthy range"],
+        "advice": advice
     }

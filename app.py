@@ -65,7 +65,7 @@ def predict(data: HeartData):
     if d["trestbps"] > THRESHOLDS["trestbps"]:
         health_flags.append("High resting blood pressure (trestbps > 140 mm Hg)")
 
-    else:
+    if not health_flags:
         health_flags.append("All vitals within healthy range")
 
     # Predict using trained model

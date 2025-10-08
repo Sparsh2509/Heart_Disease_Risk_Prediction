@@ -3,7 +3,11 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 
-app = FastAPI(title="Heart Disease Risk Scoring API")
+model = joblib.load("randomforest_heart_model.joblib")
+feature_names = joblib.load("feature_columns.joblib")
+
+app = FastAPI(title="Heart Disease Prediction API (Hybrid Model + Scoring)")
+
 
 # Input Schema
 class HeartData(BaseModel):

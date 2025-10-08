@@ -8,12 +8,18 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
 ## 🚀 Features
 
 - Predicts **presence or absence of heart disease** (0 = No Disease, 1 = Disease)
+- Uses a hybrid system:
+  - 🎯 Machine Learning (Random Forest) — provides probability-based prediction
+  - 🩺 Rule-Based Scoring — evaluates each input against known medical thresholds
+  
 - Organized input via five intuitive medical sections:
   - **Demographic Information** – age, sex
   - **Chest Pain & Vitals** – chest pain type, resting blood pressure, cholesterol
   - **Blood & Sugar Data** – fasting blood sugar, maximum heart rate
   - **ECG & Exercise Information** – resting ECG results, exercise-induced angina, ST depression
   - **Scan & Diagnostic Results** – number of major vessels colored, thalassemia type
+
+
 - Provides warning flags for abnormal health indicators:
   - ⚠️ High cholesterol                            (chol > 240 mg/dl)
   - ⚠️ High fasting blood sugar                    (fbs > 120 mg/dl)

@@ -99,32 +99,44 @@ POST /predict
 ### Request Body Example:
 ```json
 {
-  "age": 55,
+  "age": 56,
   "sex": 1,
   "cp": 2,
-  "trestbps": 130,
-  "chol": 230,
-  "fbs": 110,
+  "trestbps": 150,
+  "chol": 260,
+  "fbs": 1,
   "restecg": 1,
-  "thalach": 150,
-  "exang": 0,
-  "oldpeak": 1.5,
-  "slope": 1,
+  "thalach": 120,
+  "exang": 1,
+  "oldpeak": 2.5,
+  "slope": 2,
   "ca": 2,
-  "thal": 1
+  "thal": 2
 }
-
 
 ```
 
 ### Sample Response:
 ```json
 {
-    "prediction": 0,
-    "result": "No Heart Disease",
-    "health_flags": [
-        "All vitals within healthy range"
+  "ml_prediction": {
+    "heart_disease_probability": "82.5%",
+    "no_disease_probability": "17.5%",
+    "ml_risk_message": "High risk — please consult a cardiologist immediately"
+  },
+  "score_prediction": {
+    "risk_score": 13,
+    "risk_level": "High Risk",
+    "threshold_flags": [
+      "Older age (>50 years)",
+      "High resting blood pressure (>140 mm Hg)",
+      "High cholesterol level (>240 mg/dl)",
+      "Low max heart rate (<130 bpm)",
+      "Exercise-induced angina detected",
+      "Significant ST depression (>1.5)"
     ]
+  },
+  "final_advice": "The ML model and scoring system together indicate your overall heart risk. For accurate diagnosis, please consult a healthcare professional."
 }
 
 ```

@@ -1,1 +1,1 @@
-web: gunicorn app:app -w 4 -k uvicorn.workers.UvicornWorker --log-level info
+web: gunicorn app:app -w 4 -k uvicorn.workers.UvicornWorker

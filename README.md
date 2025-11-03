@@ -126,7 +126,7 @@ uvicorn app:app --reload
 Navigate to:
 - Swagger Docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - Root: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-- Render: [https://heart-disease-risk-prediction-hpkk.onrender.com](https://heart-disease-risk-prediction-hpkk.onrender.com)
+- AWS EB API ROOT: [http://heart-disease-api-env.eba-vrubpnic.ap-south-1.elasticbeanstalk.com](https://http://heart-disease-api-env.eba-vrubpnic.ap-south-1.elasticbeanstalk.com)
 
 ---
 
@@ -160,24 +160,30 @@ POST /predict
 ### Sample Response:
 ```json
 {
-  "ml_prediction": {
-    "heart_disease_probability": "82.5%",
-    "no_disease_probability": "17.5%",
-    "ml_risk_message": "High risk — please consult a cardiologist immediately"
-  },
-  "score_prediction": {
-    "risk_score": 13,
-    "risk_level": "High Risk",
-    "threshold_flags": [
-      "Older age (>50 years)",
-      "High resting blood pressure (>140 mm Hg)",
-      "High cholesterol level (>240 mg/dl)",
-      "Low max heart rate (<130 bpm)",
-      "Exercise-induced angina detected",
-      "Significant ST depression (>1.5)"
-    ]
-  },
-  "final_advice": "The ML model and scoring system together indicate your overall heart risk. For accurate diagnosis, please consult a healthcare professional."
+    "ml_prediction": {
+        "heart_disease_probability": "85.83%",
+        "no_disease_probability": "14.17%",
+        "ml_risk_message": "High risk — please consult a cardiologist immediately"
+    },
+    "score_prediction": {
+        "risk_score": 19,
+        "risk_level": "High Risk",
+        "threshold_flags": [
+            "Older age (>50 years)",
+            "Abnormal chest pain type (non-anginal/asymptomatic)",
+            "High resting blood pressure (>140 mm Hg)",
+            "High cholesterol level (>240 mg/dl)",
+            "High fasting blood sugar (>120 mg/dl)",
+            "Abnormal ECG result",
+            "Low max heart rate (<130 bpm)",
+            "Exercise-induced angina detected",
+            "Significant ST depression (>1.5)",
+            "Downsloping ST segment",
+            "Major vessels affected (ca >= 1)",
+            "Abnormal thalassemia (thal != 0)"
+        ]
+    },
+    "final_advice": "The ML model and scoring system together indicate your overall heart risk. For accurate diagnosis, please consult a healthcare professional."
 }
 
 ```

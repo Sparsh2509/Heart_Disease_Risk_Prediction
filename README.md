@@ -3,6 +3,9 @@
 A machine learning-powered web API using FastAPI to predict the presence of heart disease based on patient health indicators and medical history.
  This project is based on the dataset by kaggle [Heart Disease Cleveland UCI](https://www.kaggle.com/datasets/cherngs/heart-disease-cleveland-uci?resource=download).
 
+ ### Deployed Model Using Streamlit
+ [https://heartdiseaseriskprediction-qqg6vlyqzqp3vqczxab2ru.streamlit.app/](https://heartdiseaseriskprediction-qqg6vlyqzqp3vqczxab2ru.streamlit.app/)
+
 ---
 
 ## 🚀 Features

@@ -82,6 +82,7 @@ Heart_Disease_Prediction/
 ├── randomforest_heart_model.joblib                     # Trained Random forest classifier model
 ├── feature_columns.joblib                              # Saved feature order for clean prediction
 ├── requirements.txt                                    # Python package dependencies
+├── streamlit_app.py                                    # Deployed App Using API On Streamlit
 └── README.md                                           # Project documentation
 ```
 

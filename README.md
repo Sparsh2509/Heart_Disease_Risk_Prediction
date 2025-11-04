@@ -91,7 +91,7 @@ Heart_Disease_Prediction/
 ## 🛠️ Installation
 
 ### Prerequisites:
-- Python 3.9.5
+- Python 3.13.7
 
 ### Setup:
 ```bash
@@ -132,7 +132,7 @@ uvicorn app:app --reload
 Navigate to:
 - Swagger Docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - Root: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-- AWS EB API ROOT: [http://heart-disease-api-env.eba-vrubpnic.ap-south-1.elasticbeanstalk.com](https://http://heart-disease-api-env.eba-vrubpnic.ap-south-1.elasticbeanstalk.com)
+- AWS EB API URL: [http://heart-disease-api-env.eba-vrubpnic.ap-south-1.elasticbeanstalk.com](https://http://heart-disease-api-env.eba-vrubpnic.ap-south-1.elasticbeanstalk.com)
 
 ---
 

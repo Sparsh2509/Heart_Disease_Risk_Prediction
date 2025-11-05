@@ -46,7 +46,15 @@ joblib.dump(model, "randomforest_heart_model.joblib")
 joblib.dump(X.columns.tolist(), "feature_columns.joblib")
 print("\nModel and feature names saved successfully")
 
-
+plt.figure(figsize=(6, 4))
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='Blues', cbar=False,
+            xticklabels=['No Disease (0)', 'Disease (1)'],
+            yticklabels=['No Disease (0)', 'Disease (1)'])
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.title("Confusion Matrix - Random Forest")
+plt.tight_layout()
+plt.show()
 
 
 # Feature Importance

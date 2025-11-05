@@ -47,6 +47,8 @@ joblib.dump(X.columns.tolist(), "feature_columns.joblib")
 print("\nModel and feature names saved successfully")
 
 
+
+
 # Feature Importance
 feat_importance = pd.Series(model.feature_importances_, index=X.columns).sort_values(ascending=False)
 plt.figure(figsize=(10,5))

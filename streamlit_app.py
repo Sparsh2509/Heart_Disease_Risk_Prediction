@@ -4,7 +4,7 @@ import requests
 
 # CONFIGURATION
 
-API_URL = "http://heart-disease-api-env.eba-vrubpnic.ap-south-1.elasticbeanstalk.com/predict"
+API_URL = "https://heart-disease-risk-prediction-hpkk.onrender.com/predict"
 
 st.set_page_config(page_title="Heart Disease Prediction", layout="centered")
 st.title("🩺 Heart Disease Prediction (Hybrid Model + Scoring)")

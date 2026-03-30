@@ -78,7 +78,7 @@ A machine learning-powered web API using FastAPI to predict the presence of hear
 Heart_Disease_Prediction/
 ├── app.py                                              # FastAPI backend logic
 ├── Heart_Disease_Predict_Model.py                      # Model training script
-├── Heart_disease_cleveland_new.csv                     # Cleaned cleveland dataset used for training
+├── Heart_disease_cleveland_new.csv                     # Cleaned cleveland dataset used for training model
 ├── randomforest_heart_model.joblib                     # Trained Random forest classifier model
 ├── feature_columns.joblib                              # Saved feature order for clean prediction
 ├── requirements.txt                                    # Python package dependencies
